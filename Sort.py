@@ -27,9 +27,17 @@ class Sort(ABC):
 class MergeSort(Sort):
     """Class that represents a MergeSort implementation."""   
     def _sort(self):
-        if not isinstance(items, list):
-            raise ValueError("It must be a list")     
+        # Get the list of items to be sorted
         items = self.get_items()
+
+        # Check if the input is a list
+        if not isinstance(items, list):
+            raise ValueError("It must be a list")
+        
+        # Check if all elements in the list are either integers or floats
+        if not all(isinstance(x, (int, float)) for x in items):
+            raise ValueError("All elements in the list must be integers or floats")
+
         if len(items) <= 1:
             return items
 
@@ -55,4 +63,6 @@ class MergeSort(Sort):
             result.extend(left[i:])
             result.extend(right[j:])
             return result
+
+        # Recursively merge and sort the left and right halves
         return merge(new1._sort(), new2._sort())
